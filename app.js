@@ -1,4 +1,8 @@
-const  player = new MusicPlayer(musicList);
+const player = new MusicPlayer(musicList);
 
-const musicName = player.getMusic();
-console.log(musicName);
+let musicName = player.getMusic();
+console.log(musicName.getName());
+player.next();
+console.log(musicName.getName());
+player.previous();
+console.log(musicName.getName());

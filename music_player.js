@@ -12,7 +12,7 @@ class MusicPlayer {
         if (this.index != this.musicList.length) {
             this.index++;
         } else {
-            this.index = 0;
+            this.index = 1;
         }
 
     }

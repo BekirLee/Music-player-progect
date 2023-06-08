@@ -7,12 +7,12 @@ class Music {
     }
 
     getName() {
-        return this, this.title + " - " + this.file;
+        return  this.title + " - " + this.file;
     }
 }
 
 const musicList = [
     new Music("Bos ver", "Nilufer", "1.jpeg", "1.mp3"),
-    new Music("Bos ver", "Nilufer", "1.jpeg", "1.mp3"),
+    new Music("Bos ver", "Nilufer", "2.jpeg", "2.mp3"),
 
 ];

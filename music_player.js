@@ -9,12 +9,12 @@ class MusicPlayer {
     }
 
     next() {
-        if (this.index != this.musicList.length) {
+        if (this.index + 1 != this.musicList.length) {
             this.index++;
-        } else {
-            this.index = 1;
         }
-
+        else {
+            this.index = 0;
+        }
     }
 
     previous() {
@@ -23,6 +23,5 @@ class MusicPlayer {
         } else {
             this.index = this.musicList.length - 1;
         }
-
     }
 }

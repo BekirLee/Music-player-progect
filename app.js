@@ -1,3 +1,4 @@
+
 let player = new MusicPlayer(musicList);
 
 let music = player.getMusic();

@@ -10,7 +10,8 @@
     width: 100%;
 }
 
-#times {
+#times,
+#controllers {
     margin-bottom: 10px;
     display: flex;
     align-items: center;

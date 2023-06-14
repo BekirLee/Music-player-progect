@@ -9,6 +9,8 @@ const currentTime = document.querySelector("#current_time");
 //const current_time = document.querySelector("#current_time");
 const duration = document.querySelector("#duration");
 const progressBar = document.querySelector("#progress_bar");
+const volume = document.querySelector("#volume");
+const volume_bar = document.querySelector("#volume_bar");
 
 
 const player = new MusicPlayer(musicList);
@@ -91,4 +93,35 @@ progressBar.addEventListener("input", () => {
 });
 
 
+volume_bar.addEventListener("input", (e) => {
+    const volue = e.target.value;
+    audio.volume = volue / 100;
+    if (audio.volume == 0) {
+        audio.muted = true;
+        mute = "muted";
+        volume.classList = ("fa-solid fa-volume-xmark");
+    } else {
+        audio.muted = false;
+        mute = "notmuted";
+        volume.classList = ("fa-solid fa-volume-high");
+    }
+});
+
+
+let mute = "notmuted";
+
+volume.addEventListener("click", () => {
+    if (mute === "notmuted") {
+        audio.muted = true;
+        mute = "muted";
+        volume.classList = ("fa-solid fa-volume-xmark");
+        volume_bar.value = 0;
+    } else {
+        audio.muted = false;
+        mute = "notmuted";
+        volume.classList = ("fa-solid fa-volume-high");
+        volume_bar.value = 100;
+
+    }
+});
 

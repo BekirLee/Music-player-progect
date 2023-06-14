@@ -15,8 +15,6 @@ const volume_bar = document.querySelector("#volume_bar");
 
 const player = new MusicPlayer(musicList);
 
-
-
 window.addEventListener("load", () => {
     let music = player.getMusic();
     displayMusic(music);
@@ -59,13 +57,13 @@ next.addEventListener("click", () => {
 function playMusic() {
     container.classList.add("playing");
     audio.play();
-    play.classList = ("fa-solid fa-pause");
+    play.querySelector("i").classList = ("fa-solid fa-pause");
 }
 
 function pauseMusic() {
     container.classList.remove("playing");
     audio.pause();
-    play.classList = ("fa-solid fa-play");
+    play.querySelector("i").classList = ("fa-solid fa-play");
 
 }
 

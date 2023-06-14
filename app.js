@@ -5,6 +5,8 @@ const singer = document.querySelector("#music_details #singer");
 const prev = document.querySelector("#controllers #prev");
 const play = document.querySelector("#controllers #play");
 const next = document.querySelector("#controllers #next");
+const current_time = document.querySelector("#times #current_time");
+const duration = document.querySelector("#times #duration");
 
 const player = new MusicPlayer(musicList);
 
@@ -43,16 +45,11 @@ function nextMusic() {
     let music = player.getMusic();
     displayMusic(music);
     playMusic();
-};
+}
 
 next.addEventListener("click", () => {
     nextMusic();
 });
-
-
-
-
-
 
 function playMusic() {
     container.classList.add("playing");
@@ -65,8 +62,19 @@ function pauseMusic() {
     audio.pause();
     play.classList = ("fa-solid fa-play");
 
-
 }
+
+function calculateTime(resultTime) {
+    const minutes = Math.floor(resultTime / 60);
+    const seconds = Math.floor(resultTime % 60);
+    const updatedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    const finalTime = `${minutes}:${updatedSeconds}`;
+    return finalTime;
+}
+
+audio.addEventListener("loadedmetadata", () => {
+    duration.textContent = calculateTime(audio.duration);
+})
 
 
 

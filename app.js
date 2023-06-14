@@ -32,11 +32,23 @@ function prevMusic() {
     let music = player.getMusic();
     displayMusic(music);
     playMusic();
-}
+};
 
 prev.addEventListener("click", () => {
     prevMusic();
-})
+});
+
+function nextMusic() {
+    player.next();
+    let music = player.getMusic();
+    displayMusic(music);
+    playMusic();
+};
+
+next.addEventListener("click", () => {
+    nextMusic();
+});
+
 
 
 

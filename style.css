@@ -1,0 +1,18 @@
+.container {
+    display: inline-block;
+}
+
+#controllers i {
+    font-size: 20px;
+}
+
+#progress input {
+    width: 100%;
+}
+
+#times {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

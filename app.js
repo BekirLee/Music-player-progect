@@ -11,6 +11,8 @@ const duration = document.querySelector("#duration");
 const progressBar = document.querySelector("#progress_bar");
 const volume = document.querySelector("#volume");
 const volume_bar = document.querySelector("#volume_bar");
+const ulMusiclist = document.querySelector(".ulMusiclist");
+
 
 
 const player = new MusicPlayer(musicList);
@@ -18,6 +20,7 @@ const player = new MusicPlayer(musicList);
 window.addEventListener("load", () => {
     let music = player.getMusic();
     displayMusic(music);
+    displayMusicList(player.musicList);
 })
 
 function displayMusic(music) {
@@ -122,4 +125,15 @@ volume.addEventListener("click", () => {
 
     }
 });
+
+const displayMusicList = (list) => {
+    for (let i; i <= list.length; i++) {
+        var liTag = `
+        <li class="group-item d-flex aligh-items-center justify-content-between">
+        <span>Boşver "Nilüfer </span>
+        <span class="badge btn-primary rounded-pill">3:40</span>
+    </li>`;
+    }
+    ulMusiclist.insertAdjacentHTML("beforeend", liTag);
+};
 

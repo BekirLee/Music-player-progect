@@ -1,7 +1,7 @@
 class MusicPlayer {
     constructor(musicList) {
         this.musicList = musicList;
-        this.index = 1;
+        this.index = 0;
     }
 
     getMusic() {
@@ -9,7 +9,7 @@ class MusicPlayer {
     }
 
     next() {
-        if (this.index + 1 != this.musicList.length) {
+        if (this.index + 1 < this.musicList.length) {
             this.index++;
         }
         else {

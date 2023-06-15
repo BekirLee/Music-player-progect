@@ -21,6 +21,7 @@ window.addEventListener("load", () => {
     let music = player.getMusic();
     displayMusic(music);
     displayMusicList(player.musicList);
+    isPlaying();
 });
 
 function displayMusic(music) {
@@ -51,6 +52,7 @@ function nextMusic() {
     let music = player.getMusic();
     displayMusic(music);
     playMusic();
+    isPlaying();
 }
 
 next.addEventListener("click", () => {
@@ -67,6 +69,7 @@ function pauseMusic() {
     container.classList.remove("playing");
     audio.pause();
     play.querySelector("i").classList = ("fa-solid fa-play");
+    isPlaying();
 
 }
 
@@ -129,7 +132,7 @@ const displayMusicList = (list) => {
     //bu asadidaki hisseleri yeniden anlatmaq lazimdi!
     for (var i = 0; i < list.length; i++) {
         var liTag = `
-        <li class="group-item   d-flex align-items-center justify-content-between">
+        <li li-index='${i}' onclick="selectedMusic(this)" class="group-item   d-flex align-items-center justify-content-between">
         <span>${list[i].getName()} </span>
        
         <span id="music-${i}" class="badge btn-primary rounded-pill"></span>
@@ -142,10 +145,31 @@ const displayMusicList = (list) => {
         let audioTag = ulMusiclist.querySelector(`.music-${i}`);
 
         audioTag.addEventListener("loadeddata", () => {
-            audioDuration.innerText  = calculateTime(audioTag.duration);
+            audioDuration.innerText = calculateTime(audioTag.duration);
         });
     }
 
-
 };
 
+const selectedMusic = (li) => {
+    player.index = li.getAttribute("li-index");
+    displayMusic(player.getMusic());
+    playMusic();
+    isPlaying();
+};
+
+const isPlaying = () => {
+    for (let i of ulMusiclist.querySelectorAll(".ulMusiclist li")) {
+        if (i.classList.contains("playing")) {
+            i.classList.remove("playing");
+        }
+        if (i.getAttribute("li-index") == player.index) {
+            i.classList.add("playing");
+        }
+
+    }
+};
+
+audio.addEventListener("ended", () => {
+    nextMusic();    
+})

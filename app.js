@@ -21,7 +21,7 @@ window.addEventListener("load", () => {
     let music = player.getMusic();
     displayMusic(music);
     displayMusicList(player.musicList);
-})
+});
 
 function displayMusic(music) {
     title.innerText = music.getName();
@@ -108,7 +108,6 @@ volume_bar.addEventListener("input", (e) => {
     }
 });
 
-
 let mute = "notmuted";
 
 volume.addEventListener("click", () => {
@@ -127,12 +126,13 @@ volume.addEventListener("click", () => {
 });
 
 const displayMusicList = (list) => {
-    for (let i; i <= list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         var liTag = `
-        <li class="group-item d-flex aligh-items-center justify-content-between">
-        <span>Boşver "Nilüfer </span>
+        <li class="group-item   d-flex align-items-center justify-content-between">
+        <span>${list[i].getName()} </span>
         <span class="badge btn-primary rounded-pill">3:40</span>
-    </li>`;
+        <audio class=""
+         </li>`;
     }
     ulMusiclist.insertAdjacentHTML("beforeend", liTag);
 };

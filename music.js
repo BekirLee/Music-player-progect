@@ -9,9 +9,9 @@ class Music {
     getName() {
         return this.title + " - " + this.singer;
     }
+
+
 }
-
-
 const musicList = [
     new Music("Boşver", "Nilüfer", "1.jpeg", "1.mp3"),
     new Music("Bu da Geçer mi Sevgilim", "Yalin", "2.jpeg", "2.mp3"),

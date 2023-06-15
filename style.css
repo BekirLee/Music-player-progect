@@ -4,6 +4,8 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
 
+
+
 }
 
 .container {
@@ -50,4 +52,8 @@ body {
 .ulMusiclist li.playing {
     background-color: #0b5eb7;
     color: #fff;
+}
+
+.ulMusiclist li {
+    cursor: pointer;
 }

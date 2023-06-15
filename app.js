@@ -126,14 +126,26 @@ volume.addEventListener("click", () => {
 });
 
 const displayMusicList = (list) => {
-    for (let i = 0; i < list.length; i++) {
+    //bu asadidaki hisseleri yeniden anlatmaq lazimdi!
+    for (var i = 0; i < list.length; i++) {
         var liTag = `
         <li class="group-item   d-flex align-items-center justify-content-between">
         <span>${list[i].getName()} </span>
-        <span class="badge btn-primary rounded-pill">3:40</span>
-        <audio class=""
+       
+        <span id="music-${i}" class="badge btn-primary rounded-pill"></span>
+        <audio class="music-${i}" src="mp3/${list[i].file}"></audio>
          </li>`;
+
+        ulMusiclist.insertAdjacentHTML("beforeend", liTag);
+
+        let audioDuration = ulMusiclist.querySelector(`#music-${i}`);
+        let audioTag = ulMusiclist.querySelector(`.music-${i}`);
+
+        audioTag.addEventListener("loadeddata", () => {
+            audioDuration.innerText  = calculateTime(audioTag.duration);
+        });
     }
-    ulMusiclist.insertAdjacentHTML("beforeend", liTag);
+
+
 };
 

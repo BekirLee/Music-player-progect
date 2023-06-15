@@ -63,14 +63,25 @@ function playMusic() {
     container.classList.add("playing");
     audio.play();
     play.querySelector("i").classList = ("fa-solid fa-pause");
+
 }
+
+document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+        event.preventDefault(); // Sayfanın kaymaması için önlem alıyoruz
+        if (container.classList.contains("playing")) {
+            pauseMusic();
+        } else {
+            playMusic();
+        }
+    }
+});
 
 function pauseMusic() {
     container.classList.remove("playing");
     audio.pause();
     play.querySelector("i").classList = ("fa-solid fa-play");
     isPlaying();
-
 }
 
 const calculateTime = (resultTime) => {
@@ -95,7 +106,6 @@ progressBar.addEventListener("input", () => {
     currentTime.textContent = calculateTime(progressBar.value);
     audio.currentTime = progressBar.value;
 });
-
 
 volume_bar.addEventListener("input", (e) => {
     const volue = e.target.value;
@@ -132,7 +142,7 @@ const displayMusicList = (list) => {
     //bu asadidaki hisseleri yeniden anlatmaq lazimdi!
     for (var i = 0; i < list.length; i++) {
         var liTag = `
-        <li li-index='${i}' onclick="selectedMusic(this)" class="group-item   d-flex align-items-center justify-content-between">
+        <li li-index='${i}' onclick="selectedMusic(this)" class="group-item p-1  d-flex align-items-center justify-content-between">
         <span>${list[i].getName()} </span>
        
         <span id="music-${i}" class="badge btn-primary rounded-pill"></span>
@@ -171,5 +181,5 @@ const isPlaying = () => {
 };
 
 audio.addEventListener("ended", () => {
-    nextMusic();    
+    nextMusic();
 })

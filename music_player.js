@@ -1,6 +1,7 @@
 class MusicPlayer {
-    constructor(musicList) {
+    constructor(musicList,categoryList) {
         this.musicList = musicList;
+        this.categoryList = categoryList;
         this.index = 0;
     }
 

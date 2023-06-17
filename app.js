@@ -2,6 +2,7 @@ const container = document.querySelector(".container");
 const image = document.querySelector("#music_img");
 const title = document.querySelector("#music_details #title");
 const singer = document.querySelector("#music_details #singer");
+const category = document.querySelector("#music_details #category");
 const prev = document.querySelector("#controllers #prev");
 const play = document.querySelector("#controllers #play");
 const next = document.querySelector("#controllers #next");
@@ -14,8 +15,7 @@ const volume_bar = document.querySelector("#volume_bar");
 const ulMusiclist = document.querySelector(".ulMusiclist");
 
 
-
-const player = new MusicPlayer(musicList);
+const player = new MusicPlayer(musicList, categories);
 
 window.addEventListener("load", () => {
     let music = player.getMusic();
@@ -24,49 +24,28 @@ window.addEventListener("load", () => {
     isPlaying();
 });
 
-function displayMusic(music) {
-    title.innerText = music.getName();
-    singer.innerText = music.singer;
-    image.src = "img/" + music.img;
-    audio.src = "mp3/" + music.file;
-};
+
 
 play.addEventListener("click", () => {
     const isMusicPLay = container.classList.contains("playing");
     isMusicPLay ? pauseMusic() : playMusic();
 });
 
-function prevMusic() {
-    player.previous();
-    let music = player.getMusic();
-    displayMusic(music);
-    playMusic();
-};
+
 
 prev.addEventListener("click", () => {
     prevMusic();
 });
 
-function nextMusic() {
-    player.next();
-    let music = player.getMusic();
-    displayMusic(music);
-    playMusic();
-    isPlaying();
-}
+
 
 next.addEventListener("click", () => {
     nextMusic();
 });
 
-function playMusic() {
-    container.classList.add("playing");
-    audio.play();
-    play.querySelector("i").classList = ("fa-solid fa-pause");
 
-}
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener("keyup", (event) => {
     if (event.code === "Space") {
         event.preventDefault(); // Sayfanın kaymaması için önlem alıyoruz
         if (container.classList.contains("playing")) {
@@ -76,13 +55,6 @@ document.addEventListener("keydown", (event) => {
         }
     }
 });
-
-function pauseMusic() {
-    container.classList.remove("playing");
-    audio.pause();
-    play.querySelector("i").classList = ("fa-solid fa-play");
-    isPlaying();
-}
 
 const calculateTime = (resultTime) => {
     const minutes = Math.floor(resultTime / 60);
@@ -108,6 +80,7 @@ progressBar.addEventListener("input", () => {
 });
 
 volume_bar.addEventListener("input", (e) => {
+    console.log(audio.volume)
     const volue = e.target.value;
     audio.volume = volue / 100;
     if (audio.volume == 0) {
@@ -138,28 +111,6 @@ volume.addEventListener("click", () => {
     }
 });
 
-const displayMusicList = (list) => {
-    //bu asadidaki hisseleri yeniden anlatmaq lazimdi!
-    for (var i = 0; i < list.length; i++) {
-        var liTag = `
-        <li li-index='${i}' onclick="selectedMusic(this)" class="group-item p-1  d-flex align-items-center justify-content-between">
-        <span>${list[i].getName()} </span>
-       
-        <span id="music-${i}" class="badge btn-primary rounded-pill"></span>
-        <audio class="music-${i}" src="mp3/${list[i].file}"></audio>
-         </li>`;
-
-        ulMusiclist.insertAdjacentHTML("beforeend", liTag);
-
-        let audioDuration = ulMusiclist.querySelector(`#music-${i}`);
-        let audioTag = ulMusiclist.querySelector(`.music-${i}`);
-
-        audioTag.addEventListener("loadeddata", () => {
-            audioDuration.innerText = calculateTime(audioTag.duration);
-        });
-    }
-
-};
 
 const selectedMusic = (li) => {
     player.index = li.getAttribute("li-index");
@@ -183,3 +134,89 @@ const isPlaying = () => {
 audio.addEventListener("ended", () => {
     nextMusic();
 })
+
+
+const displayMusicList = (list) => {
+    //bu asadidaki hisseleri yeniden anlatmaq lazimdi!
+    for (var i = 0; i < list.length; i++) {
+        var liTag = `
+        <li li-index='${i}' onclick="selectedMusic(this)" class="group-item p-1  d-flex align-items-center justify-content-between">
+        <span>${list[i].getName()} </span>
+   
+       
+        <span id="music-${i}" class="badge btn-primary rounded-pill"></span>
+        <audio class="music-${i}" src="mp3/${list[i].file}"></audio>
+         </li>`;
+
+        ulMusiclist.insertAdjacentHTML("beforeend", liTag);
+
+        let audioDuration = ulMusiclist.querySelector(`#music-${i}`);
+        let audioTag = ulMusiclist.querySelector(`.music-${i}`);
+
+        audioTag.addEventListener("loadeddata", () => {
+            audioDuration.innerText = calculateTime(audioTag.duration);
+        });
+    }
+
+};
+
+
+function getCategorName(id) {
+    console.log(id)
+
+    var name = ''
+    let categoriesList = player.categoryList
+
+
+    categoriesList.forEach(element => {
+        element.id == id ? name = element.name : ''
+    });
+
+    return name
+
+}
+
+
+function nextMusic() {
+    player.next();
+    let music = player.getMusic();
+    displayMusic(music);
+    playMusic();
+    isPlaying();
+}
+
+
+function prevMusic() {
+    player.previous();
+    let music = player.getMusic();
+    displayMusic(music);
+    playMusic();
+};
+
+
+//pause
+function pauseMusic() {
+    container.classList.remove("playing");
+    audio.pause();
+    play.querySelector("i").classList = ("fa-solid fa-play");
+    isPlaying();
+}
+
+
+//play mucis
+function playMusic() {
+    container.classList.add("playing");
+    audio.play();
+    play.querySelector("i").classList = ("fa-solid fa-pause");
+
+}
+
+
+function displayMusic(music) {
+    title.innerText = music.getName();
+    singer.innerText = music.singer;
+    category.innerText = getCategorName(music.categoryId);
+    image.src = "img/" + music.img;
+    audio.src = "mp3/" + music.file;
+};
+

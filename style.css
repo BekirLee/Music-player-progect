@@ -5,9 +5,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.container {
-    display: inline-block;
-}
+
 
 #controllers i {
     font-size: 20px;
@@ -53,4 +51,12 @@ body {
 
 .ulMusiclist li {
     cursor: pointer;
+}
+#music_img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+#myplayer{
+    width: 450px;
 }

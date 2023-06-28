@@ -69,15 +69,18 @@ audio.addEventListener("loadedmetadata", () => {
     progressBar.max = Math.floor(audio.duration);
 });
 
+
 audio.addEventListener("timeupdate", () => {
     progressBar.value = Math.floor(audio.currentTime);
     currentTime.textContent = calculateTime(progressBar.value);
 });
 
+
 progressBar.addEventListener("input", () => {
     currentTime.textContent = calculateTime(progressBar.value);
     audio.currentTime = progressBar.value;
 });
+
 
 volume_bar.addEventListener("input", (e) => {
     console.log(audio.volume)
@@ -94,8 +97,8 @@ volume_bar.addEventListener("input", (e) => {
     }
 });
 
-let mute = "notmuted";
 
+let mute = "notmuted";
 volume.addEventListener("click", () => {
     if (mute === "notmuted") {
         audio.muted = true;
@@ -119,6 +122,7 @@ const selectedMusic = (li) => {
     isPlaying();
 };
 
+
 const isPlaying = () => {
     for (let i of ulMusiclist.querySelectorAll(".ulMusiclist li")) {
         if (i.classList.contains("playing")) {
@@ -130,6 +134,7 @@ const isPlaying = () => {
 
     }
 };
+
 
 audio.addEventListener("ended", () => {
     nextMusic();
@@ -212,6 +217,7 @@ function playMusic() {
 }
 
 
+//bringing music
 function displayMusic(music) {
     title.innerText = music.getName();
     singer.innerText = music.singer;
